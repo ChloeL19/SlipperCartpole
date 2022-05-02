@@ -166,7 +166,7 @@ class CartPoleEnv(gym.Env):
         return_info: bool = False,
         options: Optional[dict] = None,
     ):
-        super().reset(seed=seed)
+        super().reset()
         self.state = self.np_random.uniform(low=-0.05, high=0.05, size=(4,))
         self.steps_beyond_done = None
         if not return_info:
