@@ -1,1 +1,1 @@
-from slipper_gym.envs import CartPoleEnv
+from slipper_gym.envs.cartpole import CartPoleEnv
