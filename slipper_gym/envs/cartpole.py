@@ -14,7 +14,7 @@ from gym import logger, spaces
 from gym.error import DependencyNotInstalled
 
 
-class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
+class CartPoleEnv(gym.Env):
     """
     ### Description
     This environment corresponds to the version of the cart-pole problem
