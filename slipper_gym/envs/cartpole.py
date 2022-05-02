@@ -5,6 +5,7 @@ permalink: https://perma.cc/C9ZM-652R
 """
 import math
 from typing import Optional, Union
+import random
 
 import numpy as np
 
@@ -66,6 +67,7 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
         self.force_mag = 10.0
         self.tau = 0.02  # seconds between state updates
         self.kinematics_integrator = "euler"
+        self.slip = 0.25 # probability the cart "slips"
 
         # Angle at which to fail the episode
         self.theta_threshold_radians = 12 * 2 * math.pi / 360
@@ -98,7 +100,13 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
         assert self.action_space.contains(action), err_msg
         assert self.state is not None, "Call reset before using step method."
         x, x_dot, theta, theta_dot = self.state
+
+        # CHLOE CHANGE: introducing slipperyness
         force = self.force_mag if action == 1 else -self.force_mag
+        if random.random() < self.slip:
+            # goes in opposite direction with self.slip probability
+            force *= -1
+
         costheta = math.cos(theta)
         sintheta = math.sin(theta)
 
